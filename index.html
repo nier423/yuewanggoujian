@@ -250,6 +250,70 @@
             to { opacity: 0.8; transform: translateY(0); }
         }
 
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 15vw; /* 手机端标题更醒目 */
+                letter-spacing: -0.02em;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
+                margin-right: 1rem;
+            }
+
+            .title-group {
+                right: 10%;
+                top: 40%; /* 稍微上移 */
+            }
+
+            /* 字幕区域调整 */
+            #subtitle-container {
+                left: 5%;
+                width: 90%; /* 占据更多宽度 */
+                top: 60%; /* 移到下方，避免遮挡标题 */
+                text-align: center; /* 手机端居中对齐更好看 */
+            }
+
+            .subtitle-line {
+                font-size: 1.1rem; /* 字号缩小 */
+                line-height: 1.6;
+                text-shadow: 0 1px 5px rgba(0,0,0,0.8); /* 增强背景对比 */
+            }
+            
+            /* 按钮调整 */
+            #action-container {
+                width: 100px;
+                height: 100px;
+                top: 75%; /* 初始位置偏下 */
+            }
+            
+            .seal-body {
+                font-size: 1.2rem;
+                border-width: 1.5px;
+            }
+
+            /* 激活状态下的布局 */
+            body.status-active #action-container {
+                left: 50%;
+                bottom: 30px; /* 底部居中 */
+                transform: translateX(-50%); /* 修正居中 */
+                width: 50px;
+                height: 50px;
+            }
+
+            body.status-active .title-group {
+                opacity: 0.15; /* 手机端对话时标题更淡，突出字幕 */
+                right: 5%;
+                filter: blur(1px);
+            }
+
+            /* 隐藏鼠标光标装饰 */
+            .cursor, .cursor-trail {
+                display: none;
+            }
+        }
+        
         .svg-filters {
             position: absolute;
             width: 0;
@@ -482,6 +546,11 @@
             cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
             setTimeout(() => trail.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`, 80);
         });
+
+        window.addEventListener('touchmove', e => {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY;
+        }, {passive: true});
 
         initVisuals();
 
